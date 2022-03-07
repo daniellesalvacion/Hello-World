@@ -1,7 +1,5 @@
 package oobExercise;
 
-import java.sql.DriverPropertyInfo;
-
 public class camera {
 
     //Attribute
