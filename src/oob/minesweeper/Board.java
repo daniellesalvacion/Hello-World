@@ -76,6 +76,20 @@ public class Board {
         Boolean col_input = false;
         int array_row;
         int array_col;
+
+//        // Print Board
+//        for (int r = 0; r < board_row; r++) {
+//            for (int c = 0; c < board_column; c++) {
+//                //System.out.print("[-]");
+//            }
+//            System.out.println();
+//        }
+
+        System.out.print(game_board[0][0].bomb + "");
+        System.out.print(game_board[0][1].bomb + "");
+        System.out.print(game_board[1][0].bomb + "");
+        System.out.print(game_board[1][1].bomb + "");
+
         do {
             do {
                 System.out.print("Please choose the tile row. ");
@@ -98,7 +112,7 @@ public class Board {
                 }
             } while (!col_input);
             tick = game_board[array_row][array_col].get_bomb();
-            if (tick) {
+            if (!tick) {
                 System.out.println("Safe");
                 System.out.println(tick);
 //                game_board[arrayOne][arrayTwo].set_tile_value(1);
@@ -108,14 +122,17 @@ public class Board {
                 boom = true;
             }
 
+//            // Print Board
+//            for (int r = 0; r < board_row; r++) {
+//                for (int c = 0; c < board_column; c++) {
+//                    //System.out.print("[-]");
+//                    System.out.print(game_board[board_row][board_column].bomb + "");
+//                }
+//                System.out.println();
+//            }
+
         } while (!boom);
 
-        for (int r = 0; r < board_row; r++) {
-            for (int c = 0; c < board_column; c++) {
-                System.out.print("[-]");
-            }
-            System.out.println();
-        }
     }
 
 }
