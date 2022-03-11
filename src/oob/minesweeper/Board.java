@@ -13,6 +13,7 @@ public class Board {
     int board_column;
     int random_row;
     int random_column;
+    int tile_value;
     boolean random_bomb;
 
     // Constructor
@@ -31,8 +32,7 @@ public class Board {
             {
 
                 game_board[r][c] = new Tile(false);
-                //System.out.println(game_board[r][c].bomb);
-                //System.out.print("[-]");
+
             }
             //System.out.println();
         }
@@ -47,6 +47,38 @@ public class Board {
             bomb_assigned++;
 
         } while (bomb_assigned < bomb_count);
+
+        // Check Adjacent Tiles doesnt workkkkk
+//        for (int r = 0; r <= board_row; r++) {
+//            for (int c = 0; c <= board_column; c++) {
+//                int minr = r - 1;
+//                int maxr = r + 1;
+//                int minc = c - 1;
+//                int maxc = c + 1;
+//                for (int ar = minr; ar <= maxr; ar++) {
+//                    for (int ac = minc; ac <= maxc; ac++) {
+//                        if (ar >= 0 || ar < game_board.length || ac >= 0 || ac < game_board[0].length ) {
+//                            if (!game_board[ar][ac].get_bomb()) {
+//                              System.out.print("ok");
+//                                game_board[ar][ac].set_reveal(true);
+//                            } else {
+//                                tile_value++;
+//                                game_board[ar][ac].set_tile_value(tile_value);
+//                            }
+//                        }
+//                        else {
+//                            if (!game_board[ar][ac].get_bomb()) {
+//                                game_board[ar][ac].set_reveal(true);
+//                            } else {
+//                                tile_value++;
+//                                game_board[ar][ac].set_tile_value(tile_value);
+//                            }
+//                            System.out.print(game_board[r][c].get_tile_value());
+//                        }
+//                    }
+//                }
+//            }
+//        }
     }
 
     public void set_bomb_count(int bomb_count) {
@@ -70,29 +102,25 @@ public class Board {
     }
 
     public void print_board() {
-        Boolean boom = false;
-        Boolean tick;
-        Boolean row_input = false;
-        Boolean col_input = false;
+        boolean boom = false;
+        boolean tick;
+        boolean tile_reveal;
+        boolean row_input = false;
+        boolean col_input = false;
         int array_row;
         int array_col;
 
-//        // Print Board
-//        for (int r = 0; r < board_row; r++) {
-//            for (int c = 0; c < board_column; c++) {
-//                //System.out.print("[-]");
-//            }
-//            System.out.println();
-//        }
-
-        System.out.print(game_board[0][0].bomb + "");
-        System.out.print(game_board[0][1].bomb + "");
-        System.out.print(game_board[1][0].bomb + "");
-        System.out.print(game_board[1][1].bomb + "");
+        // Print Board
+        for (int r = 0; r < board_row; r++) {
+            for (int c = 0; c < board_column; c++) {
+                System.out.print("[-]");
+            }
+            System.out.println();
+        } System.out.println();
 
         do {
             do {
-                System.out.print("Please choose the tile row. ");
+                System.out.print("Please choose the tile row: ");
                 array_row = userInput.nextInt();
                 if (array_row > board_row) {
                     System.out.println("You went out of bounds. Please try again.");
@@ -102,7 +130,7 @@ public class Board {
                 }
             } while (!row_input);
             do {
-                System.out.print("Please choose the tile column. ");
+                System.out.print("Please choose the tile column: ");
                 array_col = userInput.nextInt();
                 if (array_col > board_column) {
                     System.out.println("You went out of bounds. Please try again.");
@@ -113,23 +141,35 @@ public class Board {
             } while (!col_input);
             tick = game_board[array_row][array_col].get_bomb();
             if (!tick) {
-                System.out.println("Safe");
-                System.out.println(tick);
+//                System.out.println("Safe");
 //                game_board[arrayOne][arrayTwo].set_tile_value(1);
+                System.out.println();
             } else {
-                System.out.println("Boom Game Over");
-                System.out.println(tick);
+                System.out.println("BOOM! Game Over");
+                System.out.println();
                 boom = true;
             }
 
-//            // Print Board
-//            for (int r = 0; r < board_row; r++) {
-//                for (int c = 0; c < board_column; c++) {
-//                    //System.out.print("[-]");
-//                    System.out.print(game_board[board_row][board_column].bomb + "");
-//                }
-//                System.out.println();
-//            }
+            //not working?
+            tile_reveal = true;
+            game_board[array_row][array_col].set_reveal(tile_reveal);
+
+            // Show Board
+            for (int r = 0; r < board_row; r++) {
+                for (int c = 0; c < board_column; c++) {
+                    // Re-print board
+                    if (game_board[r][c].get_reveal()) {
+                        if (!game_board[r][c].get_bomb()) {
+                            System.out.print("[" + game_board[r][c].tile_value + "]");
+                        } else {
+                            System.out.print("[X]");
+                        }
+                    } else {
+                        System.out.print("[-]");
+                    }
+                }
+                System.out.println();
+            } System.out.println();
 
         } while (!boom);
 

@@ -1,7 +1,5 @@
 package oob.minesweeper;
 
-import java.util.Random;
-
 public class Tile {
 
     // Attributes
@@ -13,10 +11,21 @@ public class Tile {
     // Constructor
     public Tile(boolean bomb) {
         this.reveal = false;
+
     }
 
     // setters
+    public void set_reveal(boolean tile_reveal) {
+        this.reveal = tile_reveal;
+    }
+    public void set_tile_value(int tile_value) {
+        this.tile_value = tile_value;
+    }
+    public void set_tile_bomb (boolean bomb) {
+        this.bomb = bomb;
+    }
 
+    // getters
     public boolean get_reveal() {
         return reveal;
     }
@@ -27,10 +36,6 @@ public class Tile {
         return tile_value;
     }
 
-    public void set_tile_bomb (boolean bomb) {
-        this.bomb = bomb;
-    }
-    public int set_tile_value() {
-        return tile_value;
-    }
+
+
 }
